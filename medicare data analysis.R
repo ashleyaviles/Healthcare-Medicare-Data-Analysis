@@ -1,13 +1,9 @@
-# Regressions
+# Data Prep and Regressions
 # Date: 12/5/2021
-# Analyst: 
-# COURSESTUDENTCODE: XXXXXX
-############################
-# Week 6
-# Regressions
+
 
 ## Set Working Directory
-setwd("/Users/ashleyaviles/Documents/UMN/(F21) Healthcare Analytics/medicare data")
+setwd("/Users/ashleyaviles/Documents/ Healthcare Analytics/medicare data")
 
 
 #### Clear Workspace and Load Packages ####
@@ -78,7 +74,7 @@ members_2010$CHRONIC_CNT_WO_DEPRESS <- ifelse(members_2010$SP_DEPRESSN == 1, mem
 ### we want to know the total number of chronic conditions for people with depression ##
 members_2010$CHRONIC_CNT_W_DEPRESS <- ifelse(members_2010$SP_DEPRESSN == 1, members_2010$SP_ALZHDMTA+members_2010$SP_CHF+members_2010$SP_CHRNKIDN+members_2010$SP_CNCR+members_2010$SP_COPD+members_2010$SP_DEPRESSN+members_2010$SP_DIABETES+members_2010$SP_ISCHMCHT+members_2010$SP_OSTEOPRS+members_2010$SP_RA_OA+members_2010$SP_STRKETIA, members_2010$CHRONIC_CNT_W_DEPRESS == 0)
 
-## we want to knowthe number of individuals with depression and chrnonic conditions #####
+## we want to know the number of individuals with depression and chrnonic conditions #####
 members_2010$CHRONIC_CNT_W_DEPRESS_YN <- ifelse(members_2010$CHRONIC_CNT_W0_DEPRESS >=1, 1, 0)
 
 members_2010$CHRONIC_CNT_W_DEPRESS_YN[is.na(members_2010$CHRONIC_CNT_W_DEPRESS_YN)] <- 0
@@ -128,7 +124,7 @@ summ(depression_medicarepay_regress)
 depression_medicarepay_regresswithDEPRESS <-lm(Medicare_pay_DEPRESS ~ SP_DEPRESSN, data = full_medicare_data_3)
 summ(depression_medicarepay_regresswithDEPRESS)
 
-##Predict mmber spending spending##
+##Predict member spending spending##
 depression_personcost_regress <-lm(PERSON_COST ~ SP_DEPRESSN, data = full_medicare_data_3)
 summ(depression_personcost_regress)
 
@@ -154,7 +150,7 @@ depressNCHRONIC_utlization <- lm(CLM_UTLZTN_DAY_CNT ~ CHRONIC_CNT_W_DEPRESS_YN, 
 summ(depressNCHRONIC_utlization)
 
 
-##Predict mmber spending spending with only depsress person cost##
+##Predict member spending spending with only depsress person cost##
 depression_personcost_regresswithDEPRESSPAY <-lm(Person_Cost_DEPRESS ~ SP_DEPRESSN, data = full_medicare_data_3)
 summ(depression_personcost_regresswithDEPRESSPAY)
 
